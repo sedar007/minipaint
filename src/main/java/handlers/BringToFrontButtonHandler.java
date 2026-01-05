@@ -1,6 +1,7 @@
 package handlers;
 
 
+import commands.ICommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import shapes.DrawingPane;
@@ -8,18 +9,14 @@ import shapes.IShape;
 
 
 public class BringToFrontButtonHandler implements EventHandler<ActionEvent> {
-    private DrawingPane drawingPane;
+    private final ICommand command;
 
-    public BringToFrontButtonHandler(DrawingPane drawingPane) {
-        this.drawingPane = drawingPane;
+    public BringToFrontButtonHandler(ICommand command) {
+        this.command = command;
     }
 
     @Override
     public void handle(ActionEvent event) {
-        for(IShape shape: drawingPane.getSelection()) {
-            drawingPane.removeShape(shape);
-            drawingPane.addShape(shape);
-        }
-        drawingPane.getSelection().clear();
+        command.execute();
     }
 }

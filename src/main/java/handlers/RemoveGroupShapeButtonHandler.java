@@ -1,5 +1,6 @@
 package handlers;
 
+import commands.ICommand;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import shapes.CompositeShape;
@@ -11,31 +12,15 @@ import java.util.List;
 
 
 public class RemoveGroupShapeButtonHandler implements EventHandler<Event> {
-    private DrawingPane drawingPane;
+    private final ICommand command;
 
-    public RemoveGroupShapeButtonHandler(DrawingPane drawingPane) {
-        this.drawingPane = drawingPane;
+    public RemoveGroupShapeButtonHandler(ICommand command) {
+        this.command = command;
     }
 
     @Override
     public void handle(Event event) {
-        if(this.drawingPane.getSelection().isEmpty()) {
-            return;
-        }
-
-        List<IShape> deselected = new ArrayList<>();
-        for(IShape shape : this.drawingPane.getSelection()) {
-            if(shape instanceof CompositeShape){
-                List<IShape> childShapes = ((CompositeShape) shape).getShapes();
-                deselected.addAll(childShapes);
-                this.drawingPane.removeShape(shape);
-
-            }
-        }
-
-        for(IShape shape : deselected)
-            this.drawingPane.addShape(shape);
-
+        command.execute();
     }
 
 

@@ -1,38 +1,20 @@
 package handlers;
 
-import javafx.event.ActionEvent;
+import commands.ICommand;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Ellipse;
-import shapes.CompositeShape;
-import shapes.DrawingPane;
-import shapes.IShape;
 
 
 
 public class AddGroupShapeButtonHandler  implements EventHandler<Event> {
-    private DrawingPane drawingPane;
+    private final ICommand command;
 
-    public AddGroupShapeButtonHandler(DrawingPane drawingPane) {
-        this.drawingPane = drawingPane;
+    public AddGroupShapeButtonHandler(ICommand command) {
+        this.command = command;
     }
 
     @Override
     public void handle(Event event) {
-        if(this.drawingPane.getSelection().isEmpty()) {
-            return;
-        }
-
-        CompositeShape groupShape = new CompositeShape( this.drawingPane.getSelection());
-
-        for(IShape shape : this.drawingPane.getSelection()) {
-            this.drawingPane.removeShape(shape);
-        }
-       this.drawingPane.addShape(groupShape);
-
-
+        command.execute();
     }
-
-
 }

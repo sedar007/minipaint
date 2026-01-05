@@ -1,5 +1,6 @@
 package handlers;
 
+import commands.ShapeCommand;
 import shapes.DrawingPane;
 import shapes.IShape;
 import shapes.ShapeAdapter;
@@ -7,8 +8,8 @@ import javafx.scene.shape.Polygon;
 
 public class BermudaTriangleButtonHandler extends ShapeButtonHandler {
 
-    public BermudaTriangleButtonHandler(DrawingPane drawingPane) {
-        super(drawingPane);
+    public BermudaTriangleButtonHandler(DrawingPane drawingPane, ShapeCommand command) {
+        super(drawingPane, command);
     }
 
     @Override
