@@ -21,6 +21,7 @@ public class ToolBar {
     private Button bermudaTriangleButton;
     private Button groupeButton;
     private Button removeGroupButton;
+    private Button toFrontButton;
 
 
     private final ButtonFactory buttonFactory = new ButtonFactory();
@@ -52,7 +53,10 @@ public class ToolBar {
         removeGroupButton = buttonFactory2.createButton(ButtonFactory.REMOVE_GROUP_SHAPE);
         removeGroupButton.addEventFilter(ActionEvent.ACTION, new RemoveGroupShapeButtonHandler(drawingPane));
 
-        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton, bermudaTriangleButton, groupeButton, removeGroupButton);
+        toFrontButton = buttonFactory2.createButton(ButtonFactory.TOFRONT);
+        toFrontButton.addEventFilter(ActionEvent.ACTION, new BringToFrontButtonHandler(drawingPane));
+
+        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton, bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton);
         hBox.getStyleClass().add("toolbar");
     }
 
