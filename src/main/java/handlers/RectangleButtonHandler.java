@@ -1,6 +1,5 @@
 package handlers;
 
-import commands.ShapeCommand;
 import shapes.DrawingPane;
 import shapes.IShape;
 import shapes.ShapeAdapter;
@@ -11,8 +10,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class RectangleButtonHandler extends ShapeButtonHandler {
 
-    public RectangleButtonHandler(DrawingPane drawingPane, ShapeCommand shapeCommand) {
-        super(drawingPane, shapeCommand);
+    public RectangleButtonHandler(DrawingPane drawingPane) {
+        super(drawingPane);
     }
 
     @Override

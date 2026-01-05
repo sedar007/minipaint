@@ -1,5 +1,7 @@
 package handlers;
 
+import commands.ICommand;
+import commands.MouseMoveCommand;
 import shapes.DrawingPane;
 import shapes.IShape;
 import javafx.event.EventHandler;
@@ -14,6 +16,8 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     private double orgSceneX;
     private double orgSceneY;
+    private Double offsetX = null;
+    private Double offsetY = null;
 
     public MouseMoveHandler(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
@@ -23,20 +27,22 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
 
     @Override
     public void handle(MouseEvent event) {
+
         if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
             orgSceneX = event.getSceneX();
             orgSceneY = event.getSceneY();
         }
 
         if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
-            double offsetX = event.getSceneX() - orgSceneX;
-            double offsetY = event.getSceneY() - orgSceneY;
-
-            for(IShape shape : drawingPane.getSelection())
-                shape.offset(offsetX, offsetY);
+             offsetX = event.getSceneX() - orgSceneX;
+             offsetY = event.getSceneY() - orgSceneY;
 
             orgSceneX = event.getSceneX();
             orgSceneY = event.getSceneY();
         }
+
+            if(offsetX == null || offsetY == null) return;
+            ICommand command = new MouseMoveCommand(drawingPane, offsetX, offsetY);
+            command.execute();
     }
 }

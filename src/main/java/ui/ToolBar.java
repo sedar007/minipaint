@@ -38,13 +38,13 @@ public class ToolBar {
         clearSelectedButton.addEventFilter(ActionEvent.ACTION, new ClearSelectedButtonHandler(new ClearSelectedCommad(drawingPane)));
 
         rectangleButton = buttonFactory.createButton(ButtonFactory.RECTANGLE);
-        rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane, new ShapeCommand(drawingPane)));
+        rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
 
         circleButton = buttonFactory.createButton(ButtonFactory.CIRCLE);
-        circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane, new ShapeCommand(drawingPane)));
+        circleButton.addEventFilter(ActionEvent.ACTION, new EllipseButtonHandler(drawingPane));
 
         bermudaTriangleButton = buttonFactory2.createButton(ButtonFactory.TRIANGLE);
-        bermudaTriangleButton.addEventFilter(ActionEvent.ACTION, new BermudaTriangleButtonHandler(drawingPane, new ShapeCommand(drawingPane)));
+        bermudaTriangleButton.addEventFilter(ActionEvent.ACTION, new BermudaTriangleButtonHandler(drawingPane));
 
         groupeButton = buttonFactory2.createButton(ButtonFactory.ADD_GROUP_SHAPE);
         groupeButton.addEventFilter(ActionEvent.ACTION, new AddGroupShapeButtonHandler(new AddGroupShapeCommand(drawingPane)));

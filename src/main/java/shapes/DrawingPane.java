@@ -1,5 +1,6 @@
 package shapes;
 
+import commands.CommandHistory;
 import handlers.MouseMoveHandler;
 import handlers.SelectionHandler;
 import javafx.scene.layout.Pane;
@@ -16,11 +17,18 @@ public class DrawingPane extends Pane implements Iterable<IShape> {
     private MouseMoveHandler mouseMoveHandler;
     private SelectionHandler selectionHandler;
 
+    public CommandHistory getCommandHistory() {
+        return commandHistory;
+    }
+
+    private CommandHistory commandHistory;
+
     private final List<IShape> shapes = new ArrayList<>();
     private final List<Observer> observers = new ArrayList<>();
 
     public DrawingPane() {
         clipChildren();
+        commandHistory = new CommandHistory();
         mouseMoveHandler = new MouseMoveHandler(this);
         selectionHandler = new SelectionHandler(this);
     }

@@ -1,6 +1,5 @@
 package handlers;
 
-import commands.ShapeCommand;
 import shapes.DrawingPane;
 import shapes.IShape;
 import shapes.ShapeAdapter;
@@ -11,8 +10,8 @@ import javafx.scene.shape.Ellipse;
  */
 public class EllipseButtonHandler extends ShapeButtonHandler {
 
-    public EllipseButtonHandler(DrawingPane drawingPane, ShapeCommand shapeCommand) {
-        super(drawingPane, shapeCommand);
+    public EllipseButtonHandler(DrawingPane drawingPane) {
+        super(drawingPane);
     }
 
     @Override
