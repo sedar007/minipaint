@@ -1,20 +1,21 @@
 package handlers;
 
-import commands.ICommand;
+import commands.AddGroupShapeCommand;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-
+import shapes.DrawingPane;
 
 
 public class AddGroupShapeButtonHandler  implements EventHandler<Event> {
-    private final ICommand command;
+    private final DrawingPane drawingPane;
 
-    public AddGroupShapeButtonHandler(ICommand command) {
-        this.command = command;
+    public AddGroupShapeButtonHandler(DrawingPane drawingPane) {
+        this.drawingPane = drawingPane;
     }
 
     @Override
     public void handle(Event event) {
-        command.execute();
+        this.drawingPane.getCommandHistory().exec(new AddGroupShapeCommand(drawingPane));
+
     }
 }

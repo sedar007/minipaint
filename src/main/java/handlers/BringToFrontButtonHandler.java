@@ -1,22 +1,22 @@
 package handlers;
 
 
-import commands.ICommand;
+import commands.BringToFrontCommand;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import shapes.DrawingPane;
-import shapes.IShape;
 
 
 public class BringToFrontButtonHandler implements EventHandler<ActionEvent> {
-    private final ICommand command;
+    private final DrawingPane drawingPane;
 
-    public BringToFrontButtonHandler(ICommand command) {
-        this.command = command;
+    public BringToFrontButtonHandler(DrawingPane drawingPane) {
+        this.drawingPane = drawingPane;
     }
 
     @Override
     public void handle(ActionEvent event) {
-        command.execute();
+        this.drawingPane.getCommandHistory().exec(new BringToFrontCommand(drawingPane));
+
     }
 }

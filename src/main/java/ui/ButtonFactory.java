@@ -21,6 +21,8 @@ public class ButtonFactory {
     public  static final String ADD_GROUP_SHAPE = "ADD_GROUP_SHAPE";
     public static final  String REMOVE_GROUP_SHAPE="REMOVE_GROUP_SHAPE";
     public static final String TOFRONT = "Front";
+    public static final String UNDO = "Undo";
+
 
     private static final String IMAGE_PATH = "/images/";
     private static final String CLEAR_ALL_FILE = "clear_all.png";
@@ -31,6 +33,8 @@ public class ButtonFactory {
     private static final String ADD_GROUP_SHAPE_FILE = "group.png";
     private static final String REMOVE_GROUP_SHAPE_FILE="ungroup.png";
     private static final String TOFRONT_FILE="ungroup.png";
+    private static final String UNDO_FILE="undo.png";
+
 
 
 
@@ -94,6 +98,11 @@ public class ButtonFactory {
                 imageFile = TOFRONT_FILE;
                 tooltipText = "Tofront Shape";
                 id = "toFrontButton";
+                break;
+            case UNDO:
+                imageFile = UNDO_FILE;
+                tooltipText = "Undo";
+                id = "undoButton";
                 break;
             default:
                 throw new IllegalArgumentException("Unknown button name: " + buttonName);

@@ -13,13 +13,14 @@ public class ClearCommand  implements ICommand {
 
     public ClearCommand(DrawingPane drawingPane) {
         this.drawingPane = drawingPane;
+        savedShapes = new ArrayList<>();
     }
 
     @Override
     public void execute() {
         if(drawingPane == null)
             return;
-
+        this.savedShapes.clear();
         for(IShape shape : drawingPane)
             this.savedShapes.add(shape);
 

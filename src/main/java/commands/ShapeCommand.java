@@ -21,7 +21,7 @@ public class ShapeCommand implements ICommand {
 
     @Override
     public void undo() {
-
+        drawingPane.removeShape(shape);
     }
 
 }

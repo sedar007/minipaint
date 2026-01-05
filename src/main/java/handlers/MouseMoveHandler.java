@@ -40,9 +40,15 @@ public class MouseMoveHandler implements EventHandler<MouseEvent> {
             orgSceneX = event.getSceneX();
             orgSceneY = event.getSceneY();
         }
+        if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+            offsetX = event.getSceneX() - orgSceneX;
+            offsetY = event.getSceneY() - orgSceneY;
+
+            orgSceneX = event.getSceneX();
+            orgSceneY = event.getSceneY();
+        }
 
             if(offsetX == null || offsetY == null) return;
-            ICommand command = new MouseMoveCommand(drawingPane, offsetX, offsetY);
-            command.execute();
+            this.drawingPane.getCommandHistory().exec(new MouseMoveCommand(drawingPane, offsetX, offsetY));
     }
 }

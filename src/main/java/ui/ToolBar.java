@@ -21,6 +21,8 @@ public class ToolBar {
     private Button groupeButton;
     private Button removeGroupButton;
     private Button toFrontButton;
+    private Button undoButton;
+
 
 
     private final ButtonFactory buttonFactory = new ButtonFactory();
@@ -30,12 +32,11 @@ public class ToolBar {
 
     public ToolBar(DrawingPane drawingPane, HBox hBox) {
         clearButton = buttonFactory.createButton(ButtonFactory.CLEAR_ALL);
-        ICommand clearCommand = new ClearCommand(drawingPane);
-        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(clearCommand));
+        clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
 
 
         clearSelectedButton = buttonFactory.createButton(ButtonFactory.CLEAR_SELECTED);
-        clearSelectedButton.addEventFilter(ActionEvent.ACTION, new ClearSelectedButtonHandler(new ClearSelectedCommad(drawingPane)));
+        clearSelectedButton.addEventFilter(ActionEvent.ACTION, new ClearSelectedButtonHandler(drawingPane));
 
         rectangleButton = buttonFactory.createButton(ButtonFactory.RECTANGLE);
         rectangleButton.addEventFilter(ActionEvent.ACTION, new RectangleButtonHandler(drawingPane));
@@ -47,15 +48,18 @@ public class ToolBar {
         bermudaTriangleButton.addEventFilter(ActionEvent.ACTION, new BermudaTriangleButtonHandler(drawingPane));
 
         groupeButton = buttonFactory2.createButton(ButtonFactory.ADD_GROUP_SHAPE);
-        groupeButton.addEventFilter(ActionEvent.ACTION, new AddGroupShapeButtonHandler(new AddGroupShapeCommand(drawingPane)));
+        groupeButton.addEventFilter(ActionEvent.ACTION, new AddGroupShapeButtonHandler(drawingPane));
 
         removeGroupButton = buttonFactory2.createButton(ButtonFactory.REMOVE_GROUP_SHAPE);
-        removeGroupButton.addEventFilter(ActionEvent.ACTION, new RemoveGroupShapeButtonHandler(new RemoveGroupShapeCommand(drawingPane)));
+        removeGroupButton.addEventFilter(ActionEvent.ACTION, new RemoveGroupShapeButtonHandler(drawingPane));
 
         toFrontButton = buttonFactory2.createButton(ButtonFactory.TOFRONT);
-        toFrontButton.addEventFilter(ActionEvent.ACTION, new BringToFrontButtonHandler(new BringToFrontCommand(drawingPane)));
+        toFrontButton.addEventFilter(ActionEvent.ACTION, new BringToFrontButtonHandler(drawingPane));
 
-        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton, bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton);
+        undoButton = buttonFactory2.createButton(ButtonFactory.UNDO);
+        undoButton.addEventFilter(ActionEvent.ACTION, new UndoButtonHandler(drawingPane));
+
+        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton, bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton);
         hBox.getStyleClass().add("toolbar");
     }
 

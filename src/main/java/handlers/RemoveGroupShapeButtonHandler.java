@@ -1,6 +1,7 @@
 package handlers;
 
 import commands.ICommand;
+import commands.RemoveGroupShapeCommand;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import shapes.CompositeShape;
@@ -12,15 +13,15 @@ import java.util.List;
 
 
 public class RemoveGroupShapeButtonHandler implements EventHandler<Event> {
-    private final ICommand command;
+    private final DrawingPane drawingPane;
 
-    public RemoveGroupShapeButtonHandler(ICommand command) {
-        this.command = command;
+    public RemoveGroupShapeButtonHandler(DrawingPane drawingPane) {
+        this.drawingPane = drawingPane;
     }
 
     @Override
     public void handle(Event event) {
-        command.execute();
+        this.drawingPane.getCommandHistory().exec(new RemoveGroupShapeCommand(drawingPane));
     }
 
 
