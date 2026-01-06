@@ -46,4 +46,11 @@ public class ShapeAdapter implements IShape {
     public void removeShapeFromPane(javafx.scene.layout.Pane pane) {
         pane.getChildren().remove(shape);
     }
+
+    @Override
+    public IShape clone() {
+        Shape clonedShape = Shape.union(shape, shape);
+        clonedShape.getStyleClass().addAll(shape.getStyleClass());
+        return new ShapeAdapter(clonedShape);
+    }
 }

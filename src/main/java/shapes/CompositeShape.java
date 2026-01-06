@@ -57,4 +57,12 @@ public class CompositeShape implements IShape {
             shape.removeShapeFromPane(pane);
 
     }
+
+    @Override
+    public IShape clone() {
+        List<IShape> shapeList = new ArrayList<>();
+        for(IShape shape : shapes)
+            shapeList.add(shape.clone());
+        return new CompositeShape(shapeList);
+    }
 }

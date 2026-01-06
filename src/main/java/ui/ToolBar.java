@@ -22,8 +22,8 @@ public class ToolBar {
     private Button removeGroupButton;
     private Button toFrontButton;
     private Button undoButton;
-
-
+    private Button cloneButton;
+    private Button decorateButton;
 
     private final ButtonFactory buttonFactory = new ButtonFactory();
     private final ButtonFactory buttonFactory2 = new ButtonFactory(ButtonFactory.TEXT_ONLY);
@@ -56,10 +56,17 @@ public class ToolBar {
         toFrontButton = buttonFactory2.createButton(ButtonFactory.TOFRONT);
         toFrontButton.addEventFilter(ActionEvent.ACTION, new BringToFrontButtonHandler(drawingPane));
 
-        undoButton = buttonFactory2.createButton(ButtonFactory.UNDO);
+        undoButton = buttonFactory.createButton(ButtonFactory.UNDO);
         undoButton.addEventFilter(ActionEvent.ACTION, new UndoButtonHandler(drawingPane));
 
-        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton, bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton);
+        cloneButton = buttonFactory.createButton(ButtonFactory.CLONE);
+        cloneButton.addEventFilter(ActionEvent.ACTION, new CloneButtonHandler(drawingPane));
+
+        decorateButton = buttonFactory.createButton(ButtonFactory.TEXT_FIELD);
+        decorateButton.addEventFilter(ActionEvent.ACTION, new DecorateButtonHandler(drawingPane));
+
+        hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton,
+                bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton, cloneButton, decorateButton);
         hBox.getStyleClass().add("toolbar");
     }
 
