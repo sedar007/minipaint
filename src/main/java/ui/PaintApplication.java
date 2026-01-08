@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.scene.layout.VBox;
 import shapes.DrawingPane;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -42,7 +43,11 @@ public class PaintApplication extends Application {
         StatutBar statutBar = new StatutBar();
         statutBar.bindTo(drawingPane);
 
-        root.setBottom(statutBar);
+        ErrorStatutBar errorStatutBar = new ErrorStatutBar();
+        errorStatutBar.bindTo(drawingPane.getCommandHistory());
+        VBox vBox = new VBox(statutBar, errorStatutBar);
+
+        root.setBottom(vBox);
         root.setTop(hBox);
 
         primaryStage.setTitle("Drawing");

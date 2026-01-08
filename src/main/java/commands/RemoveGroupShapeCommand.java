@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.NoShapeException;
 import shapes.CompositeShape;
 import shapes.DrawingPane;
 import shapes.IShape;
@@ -16,10 +17,9 @@ public class RemoveGroupShapeCommand implements ICommand {
     }
 
     @Override
-    public void execute() {
-        if(this.drawingPane.getSelection().isEmpty()) {
-            return;
-        }
+    public void execute() throws Exception {
+        if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty())
+            throw new NoShapeException();
 
         List<IShape> deselected = new ArrayList<>();
         for(IShape shape : this.drawingPane.getSelection()) {

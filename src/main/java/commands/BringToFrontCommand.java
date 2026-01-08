@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.NoShapeException;
 import shapes.DrawingPane;
 import shapes.IShape;
 
@@ -16,8 +17,9 @@ public class BringToFrontCommand implements ICommand {
     }
 
     @Override
-    public void execute() {
-
+    public void execute() throws Exception {
+        if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty())
+            throw new NoShapeException();
         for(IShape shape: drawingPane.getSelection()) {
             drawingPane.removeShape(shape);
             drawingPane.addShape(shape);

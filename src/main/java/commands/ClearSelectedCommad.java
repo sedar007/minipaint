@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.NoShapeException;
 import shapes.DrawingPane;
 import shapes.IShape;
 
@@ -16,7 +17,9 @@ public class ClearSelectedCommad implements ICommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
+        if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty())
+            throw new NoShapeException();
         selectedShapes = new ArrayList<>(this.drawingPane.getSelection());
         this.drawingPane.clearSelection();
     }

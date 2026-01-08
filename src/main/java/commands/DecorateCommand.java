@@ -1,5 +1,7 @@
 package commands;
 
+import Exceptions.NoShapeException;
+import javafx.scene.control.Alert;
 import shapes.DecorateShape;
 import shapes.DrawingPane;
 import shapes.IShape;
@@ -18,19 +20,27 @@ public class DecorateCommand implements ICommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         if(drawingPane == null)
             return;
+        if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty())
+            throw new NoShapeException();
 
         savedShapes = new ArrayList<>();
         for(IShape shape : drawingPane)
             this.savedShapes.add(shape);
-
-        for(IShape shape : drawingPane.getSelection()){
-           IShape decoratedShape = new DecorateShape(shape, "Hello");
-           this.drawingPane.removeShape(shape);
-           this.drawingPane.addShape(decoratedShape);
-
+        try {
+            for(IShape shape : drawingPane.getSelection()){
+                    IShape decoratedShape = new DecorateShape(shape, "Hello");
+                    this.drawingPane.removeShape(shape);
+                    this.drawingPane.addShape(decoratedShape);
+                }
+        }
+        catch (Exception e){
+            this.drawingPane.clear();
+            for(IShape shape : savedShapes)
+                this.drawingPane.addShape(shape);
+            throw e;
         }
     }
 

@@ -10,7 +10,8 @@ public class DecorateShape  implements IShape{
     private Shape decoratedShape;
     private String text;
 
-    public DecorateShape(IShape shape, String text) {
+    public DecorateShape(IShape shape, String text) throws Exception {
+        if(shape instanceof CompositeShape) throw new Exception("Impossible to create a decorate shape with composite shape.");
         this.shape = shape;
         this.text = text;
         this.decoratedShape= new Text(text);
@@ -55,6 +56,10 @@ public class DecorateShape  implements IShape{
 
     @Override
     public IShape clone() {
-        return new DecorateShape(this.shape.clone(), text);
+        try {
+            return new DecorateShape(this.shape.clone(), text);
+        } catch (Exception e) {
+         throw new RuntimeException(e);
+        }
     }
 }

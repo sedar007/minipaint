@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.NoShapeException;
 import shapes.CompositeShape;
 import shapes.DrawingPane;
 import shapes.IShape;
@@ -19,9 +20,10 @@ public class AddGroupShapeCommand implements ICommand {
     }
 
     @Override
-    public void execute() {
-        if(drawingPane == null || this.drawingPane.getSelection().isEmpty()) {
-            return;
+    public void execute() throws Exception{
+        if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty()){
+            throw new NoShapeException();
+
         }
 
         this.originalShapes = new ArrayList<>(this.drawingPane.getSelection());
