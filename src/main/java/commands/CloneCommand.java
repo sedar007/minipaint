@@ -1,6 +1,6 @@
 package commands;
 
-import Exceptions.NoShapeException;
+import Exceptions.NoShapeSelectedException;
 import shapes.DrawingPane;
 import shapes.IShape;
 
@@ -23,7 +23,7 @@ public class CloneCommand implements ICommand {
             return;
 
         if(this.drawingPane.getSelection() == null || this.drawingPane.getSelection().isEmpty())
-            throw new NoShapeException();
+            throw new NoShapeSelectedException();
 
         savedShapes = new ArrayList<>();
         for(IShape shape : drawingPane)
