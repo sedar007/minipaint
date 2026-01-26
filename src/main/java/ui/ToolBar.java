@@ -24,6 +24,7 @@ public class ToolBar {
     private Button undoButton;
     private Button cloneButton;
     private Button decorateButton;
+    private Button edgeButton;
 
     private final ButtonFactory buttonFactory = new ButtonFactory();
     private final ButtonFactory buttonFactory2 = new ButtonFactory(ButtonFactory.TEXT_ONLY);
@@ -65,8 +66,11 @@ public class ToolBar {
         decorateButton = buttonFactory.createButton(ButtonFactory.TEXT_FIELD);
         decorateButton.addEventFilter(ActionEvent.ACTION, new DecorateButtonHandler(drawingPane));
 
+        edgeButton = buttonFactory.createButton(ButtonFactory.EDGE_FIELD);
+        edgeButton.addEventFilter(ActionEvent.ACTION, new AddEdgeShapeButtonHandle(drawingPane));
+
         hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton,
-                bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton, cloneButton, decorateButton);
+                bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton, cloneButton, decorateButton, edgeButton);
         hBox.getStyleClass().add("toolbar");
     }
 

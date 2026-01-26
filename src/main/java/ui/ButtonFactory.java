@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import shapes.Edge;
 
 import java.io.InputStream;
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class ButtonFactory {
     public static final String UNDO = "Undo";
     public static final String CLONE= "Clone";
     public static final String TEXT_FIELD= "Text";
+    public static final String EDGE_FIELD= "Edge";
 
 
     private static final String IMAGE_PATH = "/images/";
@@ -38,6 +40,7 @@ public class ButtonFactory {
     private static final String UNDO_FILE="undo.png";
     private static final String CLONE_FILE="duplicate.png";
     private static final String TEXT_FIELD_FILE="text_fields.png";
+    private static final String LINE_FIELD_FILE="lines.png";
 
     private final String style;
 
@@ -115,6 +118,11 @@ public class ButtonFactory {
                     tooltipText = "Text Field";
                     id = "textFieldButton";
                     break;
+            case EDGE_FIELD:
+                imageFile = LINE_FIELD_FILE;
+                tooltipText = "Edge Field";
+                id = "edgeFieldButton";
+                break;
             default:
                 throw new IllegalArgumentException("Unknown button name: " + buttonName);
         }

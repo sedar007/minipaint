@@ -7,10 +7,12 @@ import javafx.scene.shape.Shape;
 public class ShapeAdapter implements IShape {
     private Shape shape;
     private boolean selected;
+    private Bounds b;
 
 
     public ShapeAdapter(Shape shape) {
         this.shape = shape;
+         b = this.shape.getBoundsInParent();
     }
 
     @Override
@@ -59,15 +61,13 @@ public class ShapeAdapter implements IShape {
 
     @Override
     public ObservableValue centerXProperty() {
-        Bounds b = this.shape.getBoundsInParent();
         final double x =  b.getMinX() + b.getWidth() / 2;
-       return this.shape.translateXProperty().add(this.shape.getTranslateX() + x);
+       return this.shape.translateXProperty().add(x);
     }
 
     @Override
     public ObservableValue centerYProperty() {
-        Bounds b = this.shape.getBoundsInParent();
         final double y = b.getMinY() + b.getHeight() / 2;
-        return this.shape.translateYProperty().add(this.shape.getTranslateY() + y);
+        return this.shape.translateYProperty().add(y);
     }
 }

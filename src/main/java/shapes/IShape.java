@@ -11,6 +11,6 @@ public interface IShape {
     void addShapeToPane(Pane pane);
     void removeShapeFromPane(Pane pane);
     IShape clone();
-    public ObservableValue centerXProperty();
-    public ObservableValue centerYProperty();
+    ObservableValue centerXProperty();
+    ObservableValue centerYProperty();
 }
