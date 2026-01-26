@@ -1,5 +1,6 @@
 package shapes;
 
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 
 public interface IShape {
@@ -10,4 +11,6 @@ public interface IShape {
     void addShapeToPane(Pane pane);
     void removeShapeFromPane(Pane pane);
     IShape clone();
+    public ObservableValue centerXProperty();
+    public ObservableValue centerYProperty();
 }

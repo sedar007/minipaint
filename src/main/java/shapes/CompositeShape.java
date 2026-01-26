@@ -1,5 +1,6 @@
 package shapes;
 
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -65,4 +66,16 @@ public class CompositeShape implements IShape {
             shapeList.add(shape.clone());
         return new CompositeShape(shapeList);
     }
+
+    @Override
+    public ObservableValue centerXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue centerYProperty() {
+        return null;
+    }
+
+
 }

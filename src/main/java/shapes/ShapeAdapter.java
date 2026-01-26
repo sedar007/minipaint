@@ -1,4 +1,7 @@
 package shapes;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
 import javafx.scene.shape.Shape;
 
 public class ShapeAdapter implements IShape {
@@ -52,5 +55,19 @@ public class ShapeAdapter implements IShape {
         Shape clonedShape = Shape.union(shape, shape);
         clonedShape.getStyleClass().addAll(shape.getStyleClass());
         return new ShapeAdapter(clonedShape);
+    }
+
+    @Override
+    public ObservableValue centerXProperty() {
+        Bounds b = this.shape.getBoundsInParent();
+        final double x =  b.getMinX() + b.getWidth() / 2;
+       return this.shape.translateXProperty().add(this.shape.getTranslateX() + x);
+    }
+
+    @Override
+    public ObservableValue centerYProperty() {
+        Bounds b = this.shape.getBoundsInParent();
+        final double y = b.getMinY() + b.getHeight() / 2;
+        return this.shape.translateYProperty().add(this.shape.getTranslateY() + y);
     }
 }

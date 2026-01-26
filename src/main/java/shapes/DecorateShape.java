@@ -1,6 +1,7 @@
 package shapes;
 
 
+import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
@@ -16,6 +17,9 @@ public class DecorateShape  implements IShape{
         this.text = text;
         this.decoratedShape= new Text(text);
         this.decoratedShape.getStyleClass().add("decorated-shape");
+
+        this.decoratedShape.translateXProperty().bind(shape.centerXProperty());
+        this.decoratedShape.translateYProperty().bind(shape.centerYProperty());
     }
 
 
@@ -37,9 +41,6 @@ public class DecorateShape  implements IShape{
     @Override
     public void offset(double x, double y) {
         this.shape.offset(x,y);
-        this.decoratedShape.setTranslateX(this.decoratedShape.getTranslateX() + x);
-        this.decoratedShape.setTranslateY(this.decoratedShape.getTranslateY() + y);
-
     }
 
     @Override
@@ -62,4 +63,16 @@ public class DecorateShape  implements IShape{
          throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public ObservableValue centerXProperty() {
+        return null;
+    }
+
+    @Override
+    public ObservableValue centerYProperty() {
+        return null;
+    }
+
+
 }
