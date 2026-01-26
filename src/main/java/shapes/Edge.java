@@ -1,6 +1,7 @@
 package shapes;
 
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
@@ -8,11 +9,15 @@ public class Edge implements IShape {
     private IShape from;
     private IShape to;
     private Line shape;
+    private Bounds bounds;
+    private boolean selected;
+
 
     public Edge(IShape from, IShape to) {
         this.from = from;
         this.to = to;
         this.shape = new Line();
+        bounds = this.shape.getBoundsInParent();
         this.shape.startXProperty().bind(this.from.centerXProperty());
         this.shape.startYProperty().bind(this.from.centerYProperty());
 
@@ -22,26 +27,28 @@ public class Edge implements IShape {
 
     @Override
     public boolean isSelected() {
-        return this.from.isSelected() && this.to.isSelected();
+        return this.selected;
     }
 
     @Override
     public void setSelected(boolean selected) {
+        this.selected = selected;
         if(selected){
-            this.from.setSelected(true);
-            this.to.setSelected(false);
+            this.shape.getStyleClass().add("selected");
+        }
+        else {
+            this.shape.getStyleClass().removeAll("selected");
         }
     }
 
     @Override
     public boolean isOn(double x, double y) {
-        return this.from.isOn(x, y) && this.to.isOn(x, y);
+        return this.shape.getBoundsInParent().contains(x, y);
     }
 
     @Override
     public void offset(double x, double y) {
-        this.from.offset(x, y);
-        this.to.offset(x, y);
+
     }
 
     @Override
@@ -62,11 +69,13 @@ public class Edge implements IShape {
 
     @Override
     public ObservableValue centerXProperty() {
-        return null;
+        final double x =  bounds.getMinX() + bounds.getWidth() / 2;
+        return this.shape.translateXProperty().add(x);
     }
 
     @Override
     public ObservableValue centerYProperty() {
-        return null;
+        final double y = bounds.getMinY() + bounds.getHeight() / 2;
+        return this.shape.translateYProperty().add(y);
     }
 }
