@@ -4,19 +4,19 @@ import Exceptions.EdgeSelectedShapeException;
 import Exceptions.NoShapeSelectedException;
 import shapes.DrawingPane;
 import shapes.Edge;
+import shapes.IEdgeStrategy;
 import shapes.IShape;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class AddEdgeShapeCommand implements ICommand {
+public class AddPathShapeCommand implements ICommand {
 
     private final DrawingPane drawingPane;
     private Edge edge;
+    private IEdgeStrategy strategy;
 
 
-    public AddEdgeShapeCommand(DrawingPane drawingPane) {
+    public AddPathShapeCommand(DrawingPane drawingPane, IEdgeStrategy strategy) {
         this.drawingPane = drawingPane;
+        this.strategy = strategy;
     }
 
     @Override
@@ -31,8 +31,8 @@ public class AddEdgeShapeCommand implements ICommand {
 
         IShape from = this.drawingPane.getSelection().get(0);
         IShape to = this.drawingPane.getSelection().get(1);
-       // edge = new Edge(from, to);
-       // this.drawingPane.addShape(edge);
+        edge = new Edge(from, to, this.strategy);
+        this.drawingPane.addShape(edge);
     }
 
     @Override

@@ -2,6 +2,7 @@ package ui;
 
 import commands.*;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
 import shapes.DrawingPane;
 import handlers.*;
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.control.Tooltip;
+import shapes.IEdgeStrategy;
+import shapes.LineStrategy;
 
 public class ToolBar {
 
@@ -25,6 +28,7 @@ public class ToolBar {
     private Button cloneButton;
     private Button decorateButton;
     private Button edgeButton;
+    private ComboBox<IEdgeStrategy> strategyBox;
 
     private final ButtonFactory buttonFactory = new ButtonFactory();
     private final ButtonFactory buttonFactory2 = new ButtonFactory(ButtonFactory.TEXT_ONLY);
@@ -32,6 +36,7 @@ public class ToolBar {
 
 
     public ToolBar(DrawingPane drawingPane, HBox hBox) {
+
         clearButton = buttonFactory.createButton(ButtonFactory.CLEAR_ALL);
         clearButton.addEventFilter(ActionEvent.ACTION, new ClearButtonHandler(drawingPane));
 
@@ -69,8 +74,21 @@ public class ToolBar {
         edgeButton = buttonFactory.createButton(ButtonFactory.EDGE_FIELD);
         edgeButton.addEventFilter(ActionEvent.ACTION, new AddEdgeShapeButtonHandle(drawingPane));
 
+
+        strategyBox = new ComboBox<>();
+        strategyBox.getItems().addAll(new LineStrategy());
+
+        strategyBox.setOnAction(e -> {
+            IEdgeStrategy selected = strategyBox.getValue();
+            if (selected != null && !drawingPane.getSelection().isEmpty()) {
+                drawingPane.getCommandHistory().exec(
+                        new AddPathShapeCommand(drawingPane, selected)
+                );
+            }
+        });
+
         hBox.getChildren().addAll(clearButton, clearSelectedButton, rectangleButton, circleButton,
-                bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton, cloneButton, decorateButton, edgeButton);
+                bermudaTriangleButton, groupeButton, removeGroupButton, toFrontButton,undoButton, cloneButton, decorateButton, edgeButton, strategyBox);
         hBox.getStyleClass().add("toolbar");
     }
 
