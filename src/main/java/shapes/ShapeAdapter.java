@@ -1,5 +1,4 @@
 package shapes;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
 import javafx.scene.shape.Shape;
